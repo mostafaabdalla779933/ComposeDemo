@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.composedemo.camera.CameraScreen
 import com.example.composedemo.data.Hotel
 import com.example.composedemo.gmailApp.notification.DetailScreen
 import com.example.composedemo.gmailApp.notification.NotificationScreen
@@ -67,6 +68,9 @@ fun NavigationGraph(navController: NavHostController,homeScrollState:ScrollState
 
         composable("pager") {
             PagerWithTabs()
+        }
+        composable("camera") {
+            CameraScreen()
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.composedemo.camera.CameraScreen
 import com.example.composedemo.gmailApp.AddPostScreen
 import com.example.composedemo.posts.NetworkScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -65,7 +66,7 @@ fun PagerWithTabs(scope: CoroutineScope = rememberCoroutineScope()){
             count = 3,
         ) { page ->
             when(page){
-                0 -> NetworkScreen()
+                0 -> CameraScreen()
                 1 -> AddPostScreen()
                 2 -> NetworkScreen()
             }
