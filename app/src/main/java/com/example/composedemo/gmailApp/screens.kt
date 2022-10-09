@@ -14,9 +14,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
+import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.example.composedemo.R
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
@@ -36,35 +34,57 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 val list = listOf("moatafa", "ahmed" ,
-    "abdalla" , "moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" ,  "moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" , "moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" ,  "moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" , "moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" ,
-    "abdalla" ,  "moatafa", "ahmed" ,
-    "abdalla" ,"moatafa", "ahmed" )
+    "abdalla" , "alaa", "Mohsen" ,
+    "peter" ,"abdelKareem", "hassan" ,
+    "mohamed" ,"Eslam", "eman" ,
+    "Dina" ,  "muslim", "remember" ,
+    "Column" ,"scrollState", "mutableStateOf" ,
+    "HomeScreen" , "text", "LocalContext" ,
+    "fillMaxWidth" ,"RoundedCornerShape", "ahmed" )
 
 @Composable
 fun HomeScreen(scrollState: ScrollState) {
     val context = LocalContext.current
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(colorResource(id = R.color.teal_700))
-            .scrollable(scrollState, Orientation.Vertical)
-    ) {
-        items(list){ str ->
-            MailItem(str,context)
+    var text by rememberSaveable { mutableStateOf("") }
+    val searchedList = remember(text, list) {
+        list.filter { e -> e.contains(text , true) }
+    }
+    Column() {
+
+        TextField(
+            modifier = Modifier
+                .background(color = Color.Transparent)
+                .padding(20.dp)
+                .fillMaxWidth()
+                .background(shape = RoundedCornerShape(10.dp), color = Color.Gray),
+            value = text,
+            onValueChange = {
+                text = it
+            },
+            label = {
+                Text("Label")
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = Color.Black,
+                disabledTextColor = Color.Transparent,
+                backgroundColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent
+            )
+        )
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(colorResource(id = R.color.teal_700))
+                .scrollable(scrollState, Orientation.Vertical)
+        ) {
+            items(searchedList){ str ->
+                MailItem(str,context)
+            }
         }
     }
+
 }
 
 @Composable

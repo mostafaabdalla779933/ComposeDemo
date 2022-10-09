@@ -9,15 +9,16 @@ import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.composedemo.R
@@ -31,12 +32,36 @@ fun NetworkScreen(viewModel: PostsVM = hiltViewModel()) {
 
     val scrollState = rememberScrollState()
     val context = LocalContext.current
+    var text by rememberSaveable { mutableStateOf("") }
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(colorResource(id = R.color.teal_700))
     ) {
+
+        TextField(
+            modifier = Modifier
+                .background(color = Color.Transparent)
+                .padding(20.dp)
+                .fillMaxWidth()
+                .background(shape = RoundedCornerShape(10.dp), color = Color.Gray),
+            value = text,
+            onValueChange = {
+                text = it
+            },
+            label = {
+                Text("Label")
+            },
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = Color.Black,
+                disabledTextColor = Color.Transparent,
+                backgroundColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent
+            )
+        )
 
         HandleState(scrollState,viewModel.statePaging,viewModel )
     }
@@ -125,6 +150,13 @@ fun PostItem(index: PostModel?, position: Int) {
     }
 
     Divider(modifier = Modifier.padding(10.dp))
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    NetworkScreen()
 
 }
 
