@@ -11,16 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun GMailApp() {
+fun GMailApp(navController: NavHostController) {
 
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     val scrollState = rememberScrollState()
-    val navController = rememberNavController()
     val homeScrollState = rememberScrollState()
 
     val bottomAndTopBarState = remember { mutableStateOf(false) }
@@ -76,7 +76,7 @@ fun addListener(navController:NavController, scaffoldState: ScaffoldState, conte
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview1() {
-    GMailApp()
+   // GMailApp(val navController = rememberNavController())
 
 }
 

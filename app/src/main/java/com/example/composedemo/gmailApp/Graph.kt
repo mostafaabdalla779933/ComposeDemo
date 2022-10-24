@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.example.composedemo.camera.CameraScreen
 import com.example.composedemo.data.Hotel
 import com.example.composedemo.gmailApp.notification.DetailScreen
@@ -23,7 +24,7 @@ import kotlinx.serialization.json.Json
 @Composable
 fun NavigationGraph(navController: NavHostController,homeScrollState:ScrollState) {
 
-    val uri = "https://www.example.com"
+    val uri = "https://www.yoogad.com"
     val profile = "Profile"
 
     NavHost(navController, startDestination = "splash") {
@@ -66,7 +67,8 @@ fun NavigationGraph(navController: NavHostController,homeScrollState:ScrollState
             }
         }
 
-        composable("pager") {
+
+        composable(route="pager", deepLinks = listOf(navDeepLink { uriPattern = uri})) {
             PagerWithTabs()
         }
         composable("camera") {

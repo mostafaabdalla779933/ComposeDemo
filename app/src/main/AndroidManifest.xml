@@ -25,13 +25,13 @@
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.ComposeDemo.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.composedemo.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.ComposeDemo.NoActionBar">
 <!--            <nav-graph android:value="NavigationGraph" />-->
-            <intent-filter>
-                <data android:scheme="https" android:host="www.example.com" />
+            <intent-filter android:autoVerify="true">
+                <data android:scheme="https" android:host="www.yoogad.com" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
