@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import androidx.navigation.navDeepLink
 import com.example.composedemo.camera.CameraScreen
+import com.example.composedemo.camera.CameraViewScreen
 import com.example.composedemo.data.Hotel
 import com.example.composedemo.gmailApp.notification.DetailScreen
 import com.example.composedemo.gmailApp.notification.NotificationScreen
@@ -73,6 +74,10 @@ fun NavigationGraph(navController: NavHostController,homeScrollState:ScrollState
         }
         composable("camera") {
             CameraScreen()
+        }
+
+        composable("camera_screen") {
+            CameraViewScreen()
         }
     }
 

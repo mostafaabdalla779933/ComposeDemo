@@ -180,6 +180,16 @@ fun JobScreen(navController: NavController) {
                 .padding(20.dp)
                 .clickable { navController.navigate("pager") }
         )
+
+        Text(
+            text = "camera",
+            fontSize = 30.sp,
+            color = Color.White,
+            modifier = Modifier
+                .background(Color.Black)
+                .padding(20.dp)
+                .clickable { navController.navigate("camera_screen") }
+        )
     }
 }
 
