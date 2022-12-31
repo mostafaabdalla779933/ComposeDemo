@@ -32,22 +32,28 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 
-val list = listOf("moatafa", "ahmed" ,
-    "abdalla" , "alaa", "Mohsen" ,
-    "peter" ,"abdelKareem", "hassan" ,
-    "mohamed" ,"Eslam", "eman" ,
-    "Dina" ,  "muslim", "remember" ,
-    "Column" ,"scrollState", "mutableStateOf" ,
-    "HomeScreen" , "text", "LocalContext" ,
-    "fillMaxWidth" ,"RoundedCornerShape", "ahmed" )
+val list = listOf(
+    "moatafa", "ahmed",
+    "abdalla", "alaa", "Mohsen",
+    "peter", "abdelKareem", "hassan",
+    "mohamed", "Eslam", "eman",
+    "Dina", "muslim", "remember",
+    "Column", "scrollState", "mutableStateOf",
+    "HomeScreen", "text", "LocalContext",
+    "fillMaxWidth", "RoundedCornerShape", "ahmed"
+)
 
 @Composable
 fun HomeScreen(scrollState: ScrollState) {
     val context = LocalContext.current
     var text by rememberSaveable { mutableStateOf("") }
     val searchedList = remember(text, list) {
-        list.filter { e -> e.contains(text , true) }
+        list.filter { e -> e.contains(text, true) }
     }
     Column() {
 
@@ -79,8 +85,8 @@ fun HomeScreen(scrollState: ScrollState) {
                 .background(colorResource(id = R.color.teal_700))
                 .scrollable(scrollState, Orientation.Vertical)
         ) {
-            items(searchedList){ str ->
-                MailItem(str,context)
+            items(searchedList) { str ->
+                MailItem(str, context)
             }
         }
     }
@@ -88,9 +94,10 @@ fun HomeScreen(scrollState: ScrollState) {
 }
 
 @Composable
-fun MailItem(index:String,context: Context){
+fun MailItem(index: String, context: Context) {
 
-    Text(text = "$index",
+    Text(
+        text = "$index",
         Modifier
             .padding(10.dp)
             .fillMaxWidth()
@@ -111,10 +118,6 @@ fun MailItem(index:String,context: Context){
 }
 
 
-
-
-
-
 @Composable
 fun AddPostScreen() {
     Column(
@@ -124,10 +127,10 @@ fun AddPostScreen() {
             .wrapContentSize(Alignment.Center)
     ) {
 
-        Box(){
+        Box() {
 
             Image(
-              painter =   painterResource(id = R.drawable.image ),
+                painter = painterResource(id = R.drawable.image),
                 contentDescription = "",
                 modifier = Modifier
                     .fillMaxSize()
@@ -135,7 +138,8 @@ fun AddPostScreen() {
                 contentScale = ContentScale.Crop
             )
 
-            Card(elevation = 18.dp,
+            Card(
+                elevation = 18.dp,
                 shape = RoundedCornerShape(30.dp),
                 modifier = Modifier
                     .width(200.dp)
@@ -144,10 +148,10 @@ fun AddPostScreen() {
                     .align(
                         Alignment.Center
                     )
-                ){
+            ) {
 
                 Image(
-                    painter =   painterResource(id = R.drawable.image ),
+                    painter = painterResource(id = R.drawable.image),
                     contentDescription = "",
                     contentScale = ContentScale.FillBounds
                 )
@@ -157,12 +161,9 @@ fun AddPostScreen() {
 }
 
 
-
-
-
-
 @Composable
 fun JobScreen(navController: NavController) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.indicator))
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -190,15 +191,20 @@ fun JobScreen(navController: NavController) {
                 .padding(20.dp)
                 .clickable { navController.navigate("camera_screen") }
         )
+
+
+        LottieAnimation(
+            composition = composition,
+            iterations = LottieConstants.IterateForever
+        )
+
     }
 }
 
 
-
-
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun MyText(){
+fun MyText() {
     var visible by remember { mutableStateOf(true) }
     Column() {
         AnimatedVisibility(

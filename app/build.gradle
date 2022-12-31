@@ -126,4 +126,8 @@ dependencies {
 
     //Permissions
     implementation("com.google.accompanist:accompanist-permissions:0.18.0")
+
+    // adi this TO your dependencies
+    implementation "com.airbnb.android:lottie-compose:5.2.0"
+
 }
