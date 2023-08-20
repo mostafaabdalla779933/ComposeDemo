@@ -1,20 +1,20 @@
 buildscript {
     ext {
-        compose_version = '1.1.1'
+        compose_version = '1.5.0'
         coroutines_version = "1.5.2"
-        kotlin_version = '1.6.10'
+        kotlin_version = '1.9.0'
         ktor_version = '1.5.1'
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
-        classpath "com.google.dagger:hilt-android-gradle-plugin:2.38.1"
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.40.1'
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '7.1.2' apply false
-    id 'com.android.library' version '7.1.2' apply false
-    id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
+    id 'com.android.application' version '7.2.1' apply false
+    id 'com.android.library' version '7.2.1' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false
 //    id 'com.google.dagger:hilt-android-gradle-plugin' version '2.38.1' apply false
 }
 

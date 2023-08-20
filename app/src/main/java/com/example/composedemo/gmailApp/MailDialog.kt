@@ -13,9 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.navigation.NavHostController
 
 @Composable
 fun DialogMail(openDialog:MutableState<Boolean>){
@@ -45,4 +47,11 @@ fun DialogMail(openDialog:MutableState<Boolean>){
             )
         }
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview5() {
+    DialogMail(Any() as MutableState<Boolean>)
 }

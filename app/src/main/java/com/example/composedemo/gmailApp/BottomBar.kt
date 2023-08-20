@@ -33,9 +33,14 @@ fun BottomNavigation(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(imageVector= item.icon, contentDescription = item.title) },
-                label = { Text(text = item.title,
-                    fontSize = 9.sp) },
+                icon = { Icon(imageVector = item.icon, contentDescription = item.title) },
+                label = {
+                    Text(
+                        text = item.title,
+                        fontSize = 9.sp,
+                        maxLines = 1
+                    )
+                },
                 selectedContentColor = Color.Black,
                 unselectedContentColor = Color.Black.copy(0.4f),
                 alwaysShowLabel = true,
@@ -44,8 +49,8 @@ fun BottomNavigation(navController: NavController) {
                     navController.navigate(item.screen_route) {
 
                         navController.graph.startDestinationRoute?.let { screen_route ->
-                           // popUpTo(screen_route) {
-                            popUpTo(BottomNavItem.Home.screen_route){
+                            // popUpTo(screen_route) {
+                            popUpTo(BottomNavItem.Home.screen_route) {
                                 saveState = false
                                 inclusive = false
                             }
@@ -60,11 +65,11 @@ fun BottomNavigation(navController: NavController) {
 }
 
 
-sealed class BottomNavItem(var title:String, var icon:ImageVector, var screen_route:String){
+sealed class BottomNavItem(var title: String, var icon: ImageVector, var screen_route: String) {
 
-    object Home : BottomNavItem("Home", Icons.Default.Add,"home")
-    object MyNetwork: BottomNavItem("My Network",Icons.Default.Menu,"my_network")
-    object AddPost: BottomNavItem("Post",Icons.Default.AccountBox,"add_post")
-    object Notification: BottomNavItem("Notification",Icons.Default.Email,"notification")
-    object Jobs: BottomNavItem("Jobs",Icons.Default.Create,"jobs")
+    object Home : BottomNavItem("Home", Icons.Default.Add, "home")
+    object MyNetwork : BottomNavItem("My Network", Icons.Default.Menu, "my_network")
+    object AddPost : BottomNavItem("Post", Icons.Default.AccountBox, "add_post")
+    object Notification : BottomNavItem("Notification", Icons.Default.Email, "notification")
+    object Jobs : BottomNavItem("Jobs", Icons.Default.Create, "jobs")
 }

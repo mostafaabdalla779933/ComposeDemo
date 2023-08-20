@@ -15,6 +15,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.pullrefresh.PullRefreshIndicator
+import androidx.compose.material.pullrefresh.pullRefresh
+import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +39,8 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 val list = listOf(
     "moatafa", "ahmed",
@@ -118,8 +123,21 @@ fun MailItem(index: String, context: Context) {
 }
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AddPostScreen() {
+    val coroutineScope = rememberCoroutineScope()
+    var refreshing by remember { mutableStateOf(false) }
+    val state = rememberPullRefreshState(
+        refreshing = refreshing,
+        onRefresh = {
+            coroutineScope.launch {
+                refreshing = true
+                delay(5000)
+                refreshing = false
+            }
+        })
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -127,7 +145,13 @@ fun AddPostScreen() {
             .wrapContentSize(Alignment.Center)
     ) {
 
-        Box() {
+        Box(modifier = Modifier.pullRefresh(state)) {
+
+            PullRefreshIndicator(
+                modifier = Modifier.align(Alignment.TopCenter),
+                refreshing = refreshing,
+                state = state
+            )
 
             Image(
                 painter = painterResource(id = R.drawable.image),
